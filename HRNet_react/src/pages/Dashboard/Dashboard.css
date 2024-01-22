@@ -1,0 +1,33 @@
+.dashboard-container {
+  width: 1440px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.menu{
+    display: flex;
+    align-items: center;
+    border: 0px;
+    border-bottom: 1px;
+    border-color: rgb(90, 110, 7);
+    border-style: solid;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.dashboard-container img {
+  width: 70px;
+  height: 70px;
+  margin-right: 20px;
+}
+
+.dashboard-container h1 {
+  color: rgb(110, 133, 15);
+  font-weight: 300;
+}
+
+.dashboard-container h2 {
+  color: rgb(146, 172, 23);
+  margin-left: 25%;
+  font-size: 50px;
+}

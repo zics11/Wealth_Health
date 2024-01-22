@@ -1,0 +1,31 @@
+.CreateEmploye-container {
+  background-color: rgb(212, 226, 157);
+  border-radius: 10px;
+  width: 20%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.CreateEmploye-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.CreateEmploye-container_imput {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background-color: rgb(235, 244, 201);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.CreateEmploye-container input {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    font-size: larger;
+}
