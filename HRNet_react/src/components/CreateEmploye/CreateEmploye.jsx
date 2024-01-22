@@ -3,17 +3,21 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import './CreateEmploye.css'
 import Dropdown from '../Dropdown/Dropdown.jsx'
+import { useDispatch } from 'react-redux'
+import { saveEmployeeData } from './employeeSlice.js'
 
 const CreateEmploye = () => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [dateOfBirth, setDateOfBirth] = useState(new Date())
   const [startDate, setStartDate] = useState(new Date())
-  const [state, setState] = useState('')
+  const [country, setCountry] = useState('')
   const [Street, setStreet] = useState('')
   const [city, setCity] = useState('')
   const [zipCode, setZipCode] = useState('')
   const [department, setDepartment] = useState('')
+
+  const dispatch = useDispatch()
 
   // Ajoutez d'autres états pour les champs restants
 
@@ -40,7 +44,7 @@ const CreateEmploye = () => {
     },
   ]
 
-  const states = [
+  const countrys = [
     {
       name: 'Alabama',
       key: 'AL',
@@ -280,18 +284,17 @@ const CreateEmploye = () => {
   ]
 
   const saveEmployee = () => {
-    const employee = {
+    const employeeData = {
       firstName,
       lastName,
       dateOfBirth: dateOfBirth.toLocaleDateString(),
       startDate: startDate.toLocaleDateString(),
-      // ...autres champs
+
+      // ...autres données
     }
 
-    const employees = JSON.parse(localStorage.getItem('employees')) || []
-    employees.push(employee)
-    localStorage.setItem('employees', JSON.stringify(employees))
-    // Afficher le modal ou un message de confirmation
+    // Dispatch l'action avec les données de l'employé
+    dispatch(saveEmployeeData(employeeData))
   }
 
   return (
@@ -336,10 +339,10 @@ const CreateEmploye = () => {
             onChange={(e) => setCity(e.target.value)}
           />
           <Dropdown
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-            list={states}
-            description='Select state'
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            list={countrys}
+            description="Select state"
           />
           <label htmlFor="zipCode">Zip code</label>
           <input
@@ -359,7 +362,7 @@ const CreateEmploye = () => {
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
             list={departments}
-            description='Select departement'
+            description="Select departement"
           />
         </div>
         <button onClick={saveEmployee}>Save</button>
