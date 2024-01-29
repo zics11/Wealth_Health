@@ -5,6 +5,8 @@ import './CreateEmploye.css'
 import Dropdown from '../Dropdown/Dropdown.jsx'
 import { useDispatch } from 'react-redux'
 import { saveEmployeeData } from './employeeSlice.js'
+import ConfirmationModal from '../Modal/Modal'
+import { departments, countrys } from '../../db/dataDropdown'
 
 const CreateEmploye = () => {
   const [firstName, setFirstName] = useState('')
@@ -16,272 +18,21 @@ const CreateEmploye = () => {
   const [city, setCity] = useState('')
   const [zipCode, setZipCode] = useState('')
   const [department, setDepartment] = useState('')
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   const dispatch = useDispatch()
 
-  // Ajoutez d'autres états pour les champs restants
-
-  const departments = [
-    {
-      name: 'Sales',
-      key: '1',
-    },
-    {
-      name: 'Marketing',
-      key: '2',
-    },
-    {
-      name: 'Engineering',
-      key: '3',
-    },
-    {
-      name: 'Human Resources',
-      key: '4',
-    },
-    {
-      name: 'Legal',
-      key: '5',
-    },
-  ]
-
-  const countrys = [
-    {
-      name: 'Alabama',
-      key: 'AL',
-    },
-    {
-      name: 'Alaska',
-      key: 'AK',
-    },
-    {
-      name: 'American Samoa',
-      key: 'AS',
-    },
-    {
-      name: 'Arizona',
-      key: 'AZ',
-    },
-    {
-      name: 'Arkansas',
-      key: 'AR',
-    },
-    {
-      name: 'California',
-      key: 'CA',
-    },
-    {
-      name: 'Colorado',
-      key: 'CO',
-    },
-    {
-      name: 'Connecticut',
-      key: 'CT',
-    },
-    {
-      name: 'Delaware',
-      key: 'DE',
-    },
-    {
-      name: 'District Of Columbia',
-      key: 'DC',
-    },
-    {
-      name: 'Federated States Of Micronesia',
-      key: 'FM',
-    },
-    {
-      name: 'Florida',
-      key: 'FL',
-    },
-    {
-      name: 'Georgia',
-      key: 'GA',
-    },
-    {
-      name: 'Guam',
-      key: 'GU',
-    },
-    {
-      name: 'Hawaii',
-      key: 'HI',
-    },
-    {
-      name: 'Idaho',
-      key: 'ID',
-    },
-    {
-      name: 'Illinois',
-      key: 'IL',
-    },
-    {
-      name: 'Indiana',
-      key: 'IN',
-    },
-    {
-      name: 'Iowa',
-      key: 'IA',
-    },
-    {
-      name: 'Kansas',
-      key: 'KS',
-    },
-    {
-      name: 'Kentucky',
-      key: 'KY',
-    },
-    {
-      name: 'Louisiana',
-      key: 'LA',
-    },
-    {
-      name: 'Maine',
-      key: 'ME',
-    },
-    {
-      name: 'Marshall Islands',
-      key: 'MH',
-    },
-    {
-      name: 'Maryland',
-      key: 'MD',
-    },
-    {
-      name: 'Massachusetts',
-      key: 'MA',
-    },
-    {
-      name: 'Michigan',
-      key: 'MI',
-    },
-    {
-      name: 'Minnesota',
-      key: 'MN',
-    },
-    {
-      name: 'Mississippi',
-      key: 'MS',
-    },
-    {
-      name: 'Missouri',
-      key: 'MO',
-    },
-    {
-      name: 'Montana',
-      key: 'MT',
-    },
-    {
-      name: 'Nebraska',
-      key: 'NE',
-    },
-    {
-      name: 'Nevada',
-      key: 'NV',
-    },
-    {
-      name: 'New Hampshire',
-      key: 'NH',
-    },
-    {
-      name: 'New Jersey',
-      key: 'NJ',
-    },
-    {
-      name: 'New Mexico',
-      key: 'NM',
-    },
-    {
-      name: 'New York',
-      key: 'NY',
-    },
-    {
-      name: 'North Carolina',
-      key: 'NC',
-    },
-    {
-      name: 'North Dakota',
-      key: 'ND',
-    },
-    {
-      name: 'Northern Mariana Islands',
-      key: 'MP',
-    },
-    {
-      name: 'Ohio',
-      key: 'OH',
-    },
-    {
-      name: 'Oklahoma',
-      key: 'OK',
-    },
-    {
-      name: 'Oregon',
-      key: 'OR',
-    },
-    {
-      name: 'Palau',
-      key: 'PW',
-    },
-    {
-      name: 'Pennsylvania',
-      key: 'PA',
-    },
-    {
-      name: 'Puerto Rico',
-      key: 'PR',
-    },
-    {
-      name: 'Rhode Island',
-      key: 'RI',
-    },
-    {
-      name: 'South Carolina',
-      key: 'SC',
-    },
-    {
-      name: 'South Dakota',
-      key: 'SD',
-    },
-    {
-      name: 'Tennessee',
-      key: 'TN',
-    },
-    {
-      name: 'Texas',
-      key: 'TX',
-    },
-    {
-      name: 'Utah',
-      key: 'UT',
-    },
-    {
-      name: 'Vermont',
-      key: 'VT',
-    },
-    {
-      name: 'Virgin Islands',
-      key: 'VI',
-    },
-    {
-      name: 'Virginia',
-      key: 'VA',
-    },
-    {
-      name: 'Washington',
-      key: 'WA',
-    },
-    {
-      name: 'West Virginia',
-      key: 'WV',
-    },
-    {
-      name: 'Wisconsin',
-      key: 'WI',
-    },
-    {
-      name: 'Wyoming',
-      key: 'WY',
-    },
-  ]
+  const resetForm = () => {
+    setFirstName('')
+    setLastName('')
+    setDateOfBirth(new Date())
+    setStartDate(new Date())
+    setCountry('')
+    setStreet('')
+    setCity('')
+    setZipCode('')
+    setDepartment('')
+  }
 
   const saveEmployee = () => {
     const employeeData = {
@@ -289,12 +40,17 @@ const CreateEmploye = () => {
       lastName,
       dateOfBirth: dateOfBirth.toLocaleDateString(),
       startDate: startDate.toLocaleDateString(),
-
-      // ...autres données
+      country,
+      Street,
+      city,
+      zipCode,
+      department,
     }
 
     // Dispatch l'action avec les données de l'employé
     dispatch(saveEmployeeData(employeeData))
+    resetForm()
+    setIsModalVisible(true)
   }
 
   return (
@@ -339,10 +95,10 @@ const CreateEmploye = () => {
             onChange={(e) => setCity(e.target.value)}
           />
           <Dropdown
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
             list={countrys}
-            description="Select state"
+            description="Select Country"
+            value={country}
+            onChange={setCountry}
           />
           <label htmlFor="zipCode">Zip code</label>
           <input
@@ -359,14 +115,18 @@ const CreateEmploye = () => {
             onChange={(date) => setStartDate(date)}
           />
           <Dropdown
-            value={department}
-            onChange={(e) => setDepartment(e.target.value)}
             list={departments}
-            description="Select departement"
+            description="Select département"
+            value={department}
+            onChange={setDepartment}
           />
         </div>
         <button onClick={saveEmployee}>Save</button>
       </form>
+      <ConfirmationModal
+        isVisible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+      />
     </div>
   )
 }

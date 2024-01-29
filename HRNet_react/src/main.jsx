@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
-import store from './store'; // Assurez-vous que le chemin vers le store est correct
-import Dashboard from './pages/Dashboard/Dashboard.jsx';
-import './index.css';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
+import store from './store'
+import Dashboard from './pages/Dashboard/Dashboard.jsx'
+import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -11,4 +11,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Dashboard />
     </Provider>
   </React.StrictMode>
-);
+)

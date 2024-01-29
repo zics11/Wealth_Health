@@ -20,8 +20,8 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   background-color: white;
   width: 100%;
-  max-height: 200px; /* Exemple de hauteur maximale */
-  overflow-y: auto; /* Active le défilement vertical si nécessaire */
+  max-height: 200px; 
+  overflow-y: auto; 
 }
 
 .dropdown-item {

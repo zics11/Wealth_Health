@@ -2,6 +2,7 @@ import React from 'react'
 import Logo from '../../assets/logo.jpg'
 import './Dashboard.css'
 import CreateEmploye from '../../components/CreateEmploye/CreateEmploye.jsx'
+import EmployeeTable from '../../components/EmployeeTable/EmployeeTable.jsx'
 
 const Dashboard = () => {
   return (
@@ -12,6 +13,7 @@ const Dashboard = () => {
         <h2>Dashboard</h2>
       </div>
       <CreateEmploye />
+      <EmployeeTable />
     </div>
   )
 }
