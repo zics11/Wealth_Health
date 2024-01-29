@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 import Logo from '../../assets/logo.jpg'
 import './Dashboard.css'
@@ -13,7 +14,7 @@ const Dashboard = () => {
         <h2>Dashboard</h2>
       </div>
       <CreateEmploye />
-      <EmployeeTable />
+      <EmployeeTable rowsPerPage={10} />
     </div>
   )
 }

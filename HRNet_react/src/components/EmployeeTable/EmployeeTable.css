@@ -11,5 +11,10 @@ td {
 }
 
 th {
+  cursor: pointer;
   background-color: #f2f2f2;
+}
+
+th.active {
+  color: blue; /* Ou tout autre style pour indiquer la colonne de tri active */
 }
