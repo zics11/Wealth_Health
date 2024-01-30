@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import './EmployeeTable.css'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 const EmployeeTable = ({ rowsPerPage }) => {
@@ -10,6 +10,12 @@ const EmployeeTable = ({ rowsPerPage }) => {
   const [sortColumn, setSortColumn] = useState(null)
   const [sortDirection, setSortDirection] = useState('asc')
   const [searchTerm, setSearchTerm] = useState('')
+
+  useEffect(() => {
+    if (employees.length === 0) {
+      setCurrentPage(0)
+    }
+  }, [employees])
 
   const sortData = (data) => {
     if (!sortColumn) return data
@@ -58,7 +64,7 @@ const EmployeeTable = ({ rowsPerPage }) => {
   const totalPages = Math.ceil(filteredEmployees.length / rowsPerPage)
 
   return (
-    <div>
+    <div className='employee_table_container'>
       <input
         type="text"
         placeholder="Rechercher..."
@@ -98,23 +104,31 @@ const EmployeeTable = ({ rowsPerPage }) => {
           </tr>
         </thead>
         <tbody>
-          {currentRows.map((employee, index) => (
-            <tr key={index}>
-              <td>{employee.firstName}</td>
-              <td>{employee.lastName}</td>
-              <td>{employee.startDate}</td>
-              <td>{employee.department}</td>
-              <td>{employee.dateOfBirth}</td>
-              <td>{employee.street}</td>
-              <td>{employee.city}</td>
-              <td>{employee.state}</td>
-              <td>{employee.zipCode}</td>
+          {filteredEmployees.length === 0 ? (
+            <tr>
+              <td colSpan="9" className="no_data">
+                No data available in table
+              </td>
             </tr>
-          ))}
-        </tbody>
+          ) : (
+            currentRows.map((employee, index) => (
+              <tr key={index}>
+                <td>{employee.firstName}</td>
+                <td>{employee.lastName}</td>
+                <td>{employee.startDate}</td>
+                <td>{employee.department}</td>
+                <td>{employee.dateOfBirth}</td>
+                <td>{employee.street}</td>
+                <td>{employee.city}</td>
+                <td>{employee.state}</td>
+                <td>{employee.zipCode}</td>
+              </tr>
+            ))
+          )}
+        </tbody>{' '}
       </table>
 
-      <div>
+      <div className="pages">
         <button
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
@@ -128,7 +142,7 @@ const EmployeeTable = ({ rowsPerPage }) => {
           onClick={() =>
             setCurrentPage((prev) => Math.min(prev + 1, totalPages))
           }
-          disabled={currentPage === totalPages}
+          disabled={currentPage === totalPages || totalPages === 0}
         >
           Suivant
         </button>

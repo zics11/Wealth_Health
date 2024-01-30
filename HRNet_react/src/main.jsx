@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import store from './store'
-import Dashboard from './pages/Dashboard/Dashboard.jsx'
+import Home from './pages/Home/Home.jsx'
+import CurrentEmployees from './pages/CurrentEmployees/CurrentEmployees.jsx'
 import './index.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
@@ -11,7 +12,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route path="/home" element={<Dashboard />}></Route>
+          <Route path="/home" element={<Home />}></Route>
+          <Route path="/table" element={<CurrentEmployees />}></Route>
         </Routes>
       </Router>
     </Provider>

@@ -1,17 +1,19 @@
 .CreateEmploye-container {
   background-color: rgb(212, 226, 157);
   border-radius: 10px;
-  width: 20%;
-  padding: 20px;
+  width: 100%;
+  padding: 20px 0px 50px 0px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  align-items: center;
 }
 
 .CreateEmploye-container form {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 20px;
+  width: 95%;
 }
 
 .CreateEmploye-container_imput {
@@ -21,6 +23,7 @@
   background-color: rgb(235, 244, 201);
   padding: 10px;
   border-radius: 10px;
+  width: 30%;
 }
 
 .CreateEmploye-container input {
