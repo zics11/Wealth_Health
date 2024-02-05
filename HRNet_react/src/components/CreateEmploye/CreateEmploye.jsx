@@ -109,7 +109,7 @@ const CreateEmploye = () => {
         </div>
         <div className="CreateEmploye-container_imput">
           <label>Start date</label>
-          <DatePicker selected={startDate} onChange={setStartDate} />
+          <DatePicker apparenceColor="blue" />
           <Dropdown
             list={departments}
             description="Select département"
