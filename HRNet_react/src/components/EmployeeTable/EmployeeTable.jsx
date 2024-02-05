@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import './EmployeeTable.css'
 
 import React, { useState, useEffect } from 'react'
@@ -64,7 +63,7 @@ const EmployeeTable = ({ rowsPerPage }) => {
   const totalPages = Math.ceil(filteredEmployees.length / rowsPerPage)
 
   return (
-    <div className='employee_table_container'>
+    <div className="employee_table_container">
       <input
         type="text"
         placeholder="Rechercher..."

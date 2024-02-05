@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
-import DatePicker from 'react-datepicker'
+// import DatePicker from 'react-datepicker'
+import DatePicker from '../DatePicker/DatePicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import './CreateEmploye.css'
 import Dropdown from '../Dropdown/Dropdown.jsx'
@@ -74,10 +75,7 @@ const CreateEmploye = () => {
             onChange={(e) => setLastName(e.target.value)}
           />
           <label>Date of birth</label>
-          <DatePicker
-            selected={dateOfBirth}
-            onChange={(date) => setDateOfBirth(date)}
-          />
+          <DatePicker selected={dateOfBirth} onChange={setDateOfBirth} />
         </div>
 
         <div className="CreateEmploye-container_imput">
@@ -111,10 +109,7 @@ const CreateEmploye = () => {
         </div>
         <div className="CreateEmploye-container_imput">
           <label>Start date</label>
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-          />
+          <DatePicker selected={startDate} onChange={setStartDate} />
           <Dropdown
             list={departments}
             description="Select département"
