@@ -13,8 +13,8 @@ import { departments, countrys } from '../../db/dataDropdown'
 const CreateEmploye = () => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
-  const [dateOfBirth, setDateOfBirth] = useState(new Date())
-  const [startDate, setStartDate] = useState(new Date())
+  const [dateOfBirth, setDateOfBirth] = useState(null)
+  const [startDate, setStartDate] = useState(null)
   const [country, setCountry] = useState('')
   const [Street, setStreet] = useState('')
   const [city, setCity] = useState('')
@@ -27,8 +27,8 @@ const CreateEmploye = () => {
   const resetForm = () => {
     setFirstName('')
     setLastName('')
-    setDateOfBirth(new Date())
-    setStartDate(new Date())
+    setDateOfBirth(null)
+    setStartDate(null)
     setCountry('')
     setStreet('')
     setCity('')
@@ -40,8 +40,8 @@ const CreateEmploye = () => {
     const employeeData = {
       firstName,
       lastName,
-      dateOfBirth: dateOfBirth.toLocaleDateString(),
-      startDate: startDate.toLocaleDateString(),
+      dateOfBirth,
+      startDate,
       country,
       Street,
       city,
@@ -75,7 +75,11 @@ const CreateEmploye = () => {
             onChange={(e) => setLastName(e.target.value)}
           />
           <label>Date of birth</label>
-          <DatePicker selected={dateOfBirth} onChange={setDateOfBirth} />
+          <DatePicker
+            apparenceColor="rgb(110, 133, 15)"
+            inputValue={dateOfBirth}
+            onChange={setDateOfBirth}
+          />
         </div>
 
         <div className="CreateEmploye-container_imput">
@@ -109,7 +113,11 @@ const CreateEmploye = () => {
         </div>
         <div className="CreateEmploye-container_imput">
           <label>Start date</label>
-          <DatePicker apparenceColor="blue" />
+          <DatePicker
+            apparenceColor="rgb(110, 133, 15)"
+            inputValue={startDate}
+            onChange={setStartDate}
+          />
           <Dropdown
             list={departments}
             description="Select département"

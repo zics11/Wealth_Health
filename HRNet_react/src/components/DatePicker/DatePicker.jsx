@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './DatePicker.css'
 
-const DatePicker = ({ apparenceColor }) => {
+const DatePicker = ({ apparenceColor, inputValue, onChange }) => {
   const [date, setDate] = useState('')
   const [activeDate, setActiveDate] = useState('201901')
   const [activeDay, setActiveDay] = useState('')
@@ -41,6 +41,11 @@ const DatePicker = ({ apparenceColor }) => {
     populateCalendar(currentYear, currentMonth)
     setActiveDate(currentYear + currentMonth)
   }, [])
+
+  useEffect(() => {
+    handleDateChange(date)
+    console.log('date', date)
+  }, [date])
 
   const focus = () => {
     setActive(true)
@@ -174,8 +179,13 @@ const DatePicker = ({ apparenceColor }) => {
     } else if (cell.month === getNextMonth(activeDate.substr(4, 2))) {
       setNextMonth()
     }
-    setActiveDay(('0' + cell.day).slice(-2) + cell.month + cell.year)
-    setDate(('0' + cell.day).slice(-2) + '/' + cell.month + '/' + cell.year)
+    console.log('dsq')
+    const newDate =
+      ('0' + cell.day).slice(-2) + '/' + cell.month + '/' + cell.year
+    // handleDateChange(newDate) // Passer la nouvelle valeur de date à handleDateChange
+
+    setActiveDay(newDate)
+    setDate(newDate)
   }
 
   const isSelected = (cell) => {
@@ -229,12 +239,38 @@ const DatePicker = ({ apparenceColor }) => {
     </div>
   ))
 
+  const handleDateChange = (newDate) => {
+    console.log('newDate', newDate)
+
+    // Diviser la chaîne en jour, mois et année
+    const [day, month, year] = newDate.split('/')
+
+    // Créer un nouvel objet Date
+    const formattedDate = new Date(`${year}-${month}-${day}`)
+
+    // Vérifier si la date est valide
+    if (isNaN(formattedDate.getTime())) {
+      console.log('Invalid date')
+      return // Sortir de la fonction si la date est invalide
+    }
+
+    // Formater la date au format "jj/mm/aaaa"
+    const formattedDateString = formattedDate.toLocaleDateString('fr-FR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    })
+
+    console.log('formattedDate', formattedDateString)
+    onChange(formattedDateString) // Appeler la fonction onChange pour transmettre la nouvelle valeur au composant parent
+  }
+
   return (
     <div className="calendar">
       <input
         type="text"
         value={date}
-        onChange={(e) => setDate(e.target.value)}
+        onChange={handleDateChange} // Appel de la fonction handleDateChange lors du changement de valeur de l'input
         onFocus={focus}
         onBlur={blur}
         placeholder="Pick a date"
