@@ -20,10 +20,14 @@ const EmployeeTable = ({ rowsPerPage }) => {
     if (!sortColumn) return data
 
     return [...data].sort((a, b) => {
-      if (a[sortColumn] < b[sortColumn]) {
+      // Convertir les dates en objets Date pour le tri
+      const dateA = new Date(a[sortColumn])
+      const dateB = new Date(b[sortColumn])
+
+      if (dateA < dateB) {
         return sortDirection === 'asc' ? -1 : 1
       }
-      if (a[sortColumn] > b[sortColumn]) {
+      if (dateA > dateB) {
         return sortDirection === 'asc' ? 1 : -1
       }
       return 0

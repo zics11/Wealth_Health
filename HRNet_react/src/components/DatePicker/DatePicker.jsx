@@ -247,6 +247,8 @@ const DatePicker = ({ apparenceColor, inputValue, onChange }) => {
 
     // Créer un nouvel objet Date
     const formattedDate = new Date(`${year}-${month}-${day}`)
+    console.log('formattedDate',  formattedDate)
+
 
     // Vérifier si la date est valide
     if (isNaN(formattedDate.getTime())) {
@@ -255,13 +257,9 @@ const DatePicker = ({ apparenceColor, inputValue, onChange }) => {
     }
 
     // Formater la date au format "jj/mm/aaaa"
-    const formattedDateString = formattedDate.toLocaleDateString('fr-FR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    })
+    const formattedDateString = formattedDate.toISOString().split('T')[0]
 
-    console.log('formattedDate', formattedDateString)
+    console.log('formattedDateString', formattedDateString)
     onChange(formattedDateString) // Appeler la fonction onChange pour transmettre la nouvelle valeur au composant parent
   }
 

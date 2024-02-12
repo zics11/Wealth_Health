@@ -62,7 +62,7 @@ const CreateEmploye = () => {
         <div className="CreateEmploye-container_imput">
           <label htmlFor="firstName">First Name</label>
           <input
-            type="text"
+            type="date"
             value={firstName}
             id="firstName"
             onChange={(e) => setFirstName(e.target.value)}
