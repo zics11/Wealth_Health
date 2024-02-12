@@ -11,11 +11,11 @@ const EmployeeTable = ({ rowsPerPage, datas, headers }) => {
   const [sortDirection, setSortDirection] = useState('asc')
   const [searchTerm, setSearchTerm] = useState('')
 
-EmployeeTable.propTypes = {
-  rowsPerPage: PropTypes.number.isRequired,
-  datas: PropTypes.arrayOf(PropTypes.object).isRequired,
-  headers: PropTypes.arrayOf(PropTypes.string).isRequired,
-}
+  EmployeeTable.propTypes = {
+    rowsPerPage: PropTypes.number.isRequired,
+    datas: PropTypes.arrayOf(PropTypes.object).isRequired,
+    headers: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }
   useEffect(() => {
     if (datas.length === 0) {
       setCurrentPage(0)
@@ -59,9 +59,15 @@ EmployeeTable.propTypes = {
   const getFilteredData = (data) => {
     if (!searchTerm) return data
     return data.filter((employee) =>
-      Object.values(employee).some((value) =>
-        value.toString().toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      Object.values(employee).some((value) => {
+        if (value !== null && value !== undefined) {
+          return value
+            .toString()
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase())
+        }
+        return false // Si la valeur est null ou undefined, retourne false
+      })
     )
   }
 
