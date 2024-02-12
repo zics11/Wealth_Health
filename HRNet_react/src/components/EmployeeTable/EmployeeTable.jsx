@@ -2,19 +2,25 @@ import './EmployeeTable.css'
 
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import PropTypes from 'prop-types'
 
-const EmployeeTable = ({ rowsPerPage }) => {
-  const employees = useSelector((state) => state.employee.employees)
+const EmployeeTable = ({ rowsPerPage, datas, headers }) => {
+  // const employees = useSelector((state) => state.employee.employees)
   const [currentPage, setCurrentPage] = useState(1)
   const [sortColumn, setSortColumn] = useState(null)
   const [sortDirection, setSortDirection] = useState('asc')
   const [searchTerm, setSearchTerm] = useState('')
 
+EmployeeTable.propTypes = {
+  rowsPerPage: PropTypes.number.isRequired,
+  datas: PropTypes.arrayOf(PropTypes.object).isRequired,
+  headers: PropTypes.arrayOf(PropTypes.string).isRequired,
+}
   useEffect(() => {
-    if (employees.length === 0) {
+    if (datas.length === 0) {
       setCurrentPage(0)
     }
-  }, [employees])
+  }, [datas])
 
   const sortData = (data) => {
     if (!sortColumn) return data
@@ -59,12 +65,12 @@ const EmployeeTable = ({ rowsPerPage }) => {
     )
   }
 
-  const filteredEmployees = getFilteredData(employees)
-  const sortedEmployees = sortData(filteredEmployees)
+  const filteredDatas = getFilteredData(datas)
+  const sortedDatas = sortData(filteredDatas)
   const indexOfLastRow = currentPage * rowsPerPage
   const indexOfFirstRow = indexOfLastRow - rowsPerPage
-  const currentRows = sortedEmployees.slice(indexOfFirstRow, indexOfLastRow)
-  const totalPages = Math.ceil(filteredEmployees.length / rowsPerPage)
+  const currentRows = sortedDatas.slice(indexOfFirstRow, indexOfLastRow)
+  const totalPages = Math.ceil(filteredDatas.length / rowsPerPage)
 
   return (
     <div className="employee_table_container">
@@ -77,54 +83,27 @@ const EmployeeTable = ({ rowsPerPage }) => {
       <table>
         <thead>
           <tr>
-            <th onClick={() => handleSort('firstName')}>
-              First Name{renderSortIcon('firstName')}
-            </th>
-            <th onClick={() => handleSort('lastName')}>
-              Last Name{renderSortIcon('lastName')}
-            </th>
-            <th onClick={() => handleSort('startDate')}>
-              Start Date{renderSortIcon('startDate')}
-            </th>
-            <th onClick={() => handleSort('department')}>
-              Department{renderSortIcon('department')}
-            </th>
-            <th onClick={() => handleSort('dateOfBirth')}>
-              Date of Birth{renderSortIcon('dateOfBirth')}
-            </th>
-            <th onClick={() => handleSort('street')}>
-              Street{renderSortIcon('street')}
-            </th>
-            <th onClick={() => handleSort('city')}>
-              City{renderSortIcon('city')}
-            </th>
-            <th onClick={() => handleSort('state')}>
-              State{renderSortIcon('state')}
-            </th>
-            <th onClick={() => handleSort('zipCode')}>
-              Zip Code{renderSortIcon('zipCode')}
-            </th>
+            {headers.map((header, index) => (
+              <th key={index} onClick={() => handleSort(header)}>
+                {header}
+                {renderSortIcon(header)}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {filteredEmployees.length === 0 ? (
+          {filteredDatas.length === 0 ? (
             <tr>
-              <td colSpan="9" className="no_data">
+              <td colSpan={headers.length} className="no_data">
                 No data available in table
               </td>
             </tr>
           ) : (
-            currentRows.map((employee, index) => (
-              <tr key={index}>
-                <td>{employee.firstName}</td>
-                <td>{employee.lastName}</td>
-                <td>{employee.startDate}</td>
-                <td>{employee.department}</td>
-                <td>{employee.dateOfBirth}</td>
-                <td>{employee.street}</td>
-                <td>{employee.city}</td>
-                <td>{employee.state}</td>
-                <td>{employee.zipCode}</td>
+            currentRows.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {headers.map((header, colIndex) => (
+                  <td key={colIndex}>{row[header]}</td>
+                ))}
               </tr>
             ))
           )}
