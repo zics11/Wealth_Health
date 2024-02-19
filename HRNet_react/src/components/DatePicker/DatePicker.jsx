@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './DatePicker.css'
 
-const DatePicker = ({ apparenceColor, inputValue, onChange }) => {
+const DatePicker = ({ apparenceColor, inputValue, change }) => {
   const [date, setDate] = useState('')
   const [activeDate, setActiveDate] = useState('201901')
   const [activeDay, setActiveDay] = useState('')
@@ -34,6 +34,13 @@ const DatePicker = ({ apparenceColor, inputValue, onChange }) => {
     11: 'Novembre',
     12: 'Décembre',
   }
+
+  useEffect(() => {
+    if (inputValue === '') {
+      // Réinitialiser la date sélectionnée si inputValue est null
+      setDate('')
+    }
+  }, [inputValue])
 
   useEffect(() => {
     const currentYear = new Date().getFullYear()
@@ -247,8 +254,7 @@ const DatePicker = ({ apparenceColor, inputValue, onChange }) => {
 
     // Créer un nouvel objet Date
     const formattedDate = new Date(`${year}-${month}-${day}`)
-    console.log('formattedDate',  formattedDate)
-
+    console.log('formattedDate', formattedDate)
 
     // Vérifier si la date est valide
     if (isNaN(formattedDate.getTime())) {
@@ -260,7 +266,7 @@ const DatePicker = ({ apparenceColor, inputValue, onChange }) => {
     const formattedDateString = formattedDate.toISOString().split('T')[0]
 
     console.log('formattedDateString', formattedDateString)
-    onChange(formattedDateString) // Appeler la fonction onChange pour transmettre la nouvelle valeur au composant parent
+    change(formattedDateString) // Appeler la fonction onChange pour transmettre la nouvelle valeur au composant parent
   }
 
   return (

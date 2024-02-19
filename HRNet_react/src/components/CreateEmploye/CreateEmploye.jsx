@@ -27,8 +27,8 @@ const CreateEmploye = () => {
   const resetForm = () => {
     setFirstName('')
     setLastName('')
-    setDateOfBirth(null)
-    setStartDate(null)
+    setDateOfBirth('') // Réinitialiser la date de naissance à la date actuelle
+    setStartDate('') // Réinitialiser la date de début à la date actuelle
     setCountry('')
     setStreet('')
     setCity('')
@@ -68,7 +68,7 @@ const CreateEmploye = () => {
             onChange={(e) => setFirstName(e.target.value)}
           />
           <label htmlFor="lastName">Last Name</label>
-          <input
+          <input  
             type="text"
             value={lastName}
             id="lastName"
@@ -78,7 +78,7 @@ const CreateEmploye = () => {
           <DatePicker
             apparenceColor="rgb(110, 133, 15)"
             inputValue={dateOfBirth}
-            onChange={setDateOfBirth}
+            change={setDateOfBirth}
           />
         </div>
         <div className="CreateEmploye-container_imput">
@@ -115,7 +115,7 @@ const CreateEmploye = () => {
           <DatePicker
             apparenceColor="rgb(110, 133, 15)"
             inputValue={startDate}
-            onChange={setStartDate}
+            change={setStartDate}
           />
           <Dropdown
             list={departments}
