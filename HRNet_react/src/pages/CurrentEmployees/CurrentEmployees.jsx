@@ -26,7 +26,7 @@ const CurrentEmployees = () => {
         rowsPerPage={10}
         datas={employees}
         headers={head}
-        apparenceColor="#ebf4c9"
+        apparenceColor="#f5b1b1"
       />
     </div>
   )
