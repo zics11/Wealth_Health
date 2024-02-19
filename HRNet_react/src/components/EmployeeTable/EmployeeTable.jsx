@@ -1,10 +1,9 @@
 import './EmployeeTable.css'
 
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
-const EmployeeTable = ({ rowsPerPage, datas, headers }) => {
+const EmployeeTable = ({ rowsPerPage, datas, headers, apparenceColor }) => {
   // const employees = useSelector((state) => state.employee.employees)
   const [currentPage, setCurrentPage] = useState(1)
   const [sortColumn, setSortColumn] = useState(null)
@@ -38,6 +37,32 @@ const EmployeeTable = ({ rowsPerPage, datas, headers }) => {
       }
       return 0
     })
+  }
+
+  const darkenColor = (color) => {
+    // Vérifier si la couleur est au format hexadécimal
+    const hexRegex = /^#(?:[0-9a-fA-F]{3}){1,2}$/
+    if (!hexRegex.test(color)) {
+      console.error(
+        'Invalid color format. Please provide a valid hexadecimal color.'
+      )
+      return color
+    }
+
+    // Convertir la couleur hexadécimale en valeurs RGB
+    let r = parseInt(color.slice(1, 3), 16)
+    let g = parseInt(color.slice(3, 5), 16)
+    let b = parseInt(color.slice(5, 7), 16)
+
+    // Réduire les valeurs RGB pour assombrir la couleur
+    r = Math.round(r * 0.6) // 80% de la valeur originale
+    g = Math.round(g * 0.6)
+    b = Math.round(b * 0.6)
+
+    // Convertir les valeurs RGB en format hexadécimal
+    const darkColor = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`
+
+    return darkColor
   }
 
   const handleSort = (column) => {
@@ -86,11 +111,27 @@ const EmployeeTable = ({ rowsPerPage, datas, headers }) => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <table>
+      <table
+        style={{
+          border: darkenColor(apparenceColor),
+        }}
+      >
         <thead>
-          <tr>
+          <tr
+            style={{
+              border: darkenColor(apparenceColor),
+            }}
+          >
             {headers.map((header, index) => (
-              <th key={index} onClick={() => handleSort(header)}>
+              <th
+                key={index}
+                onClick={() => handleSort(header)}
+                style={{
+                  backgroundColor: apparenceColor,
+                  color: darkenColor(apparenceColor),
+                  border: `1px solid ${darkenColor(apparenceColor)}`,
+                }}
+              >
                 {header}
                 {renderSortIcon(header)}
               </th>
@@ -100,7 +141,13 @@ const EmployeeTable = ({ rowsPerPage, datas, headers }) => {
         <tbody>
           {filteredDatas.length === 0 ? (
             <tr>
-              <td colSpan={headers.length} className="no_data">
+              <td
+                colSpan={headers.length}
+                className="no_data"
+                style={{
+                  border: `1px solid ${darkenColor(apparenceColor)}`,
+                }}
+              >
                 No data available in table
               </td>
             </tr>
@@ -108,18 +155,29 @@ const EmployeeTable = ({ rowsPerPage, datas, headers }) => {
             currentRows.map((row, rowIndex) => (
               <tr key={rowIndex}>
                 {headers.map((header, colIndex) => (
-                  <td key={colIndex}>{row[header]}</td>
+                  <td
+                    key={colIndex}
+                    style={{
+                      border: `1px solid ${darkenColor(apparenceColor)}`,
+                    }}
+                  >
+                    {row[header]}
+                  </td>
                 ))}
               </tr>
             ))
           )}
-        </tbody>{' '}
+        </tbody>
       </table>
 
       <div className="pages">
         <button
+          style={{
+            backgroundColor: apparenceColor,
+            color: darkenColor(apparenceColor),
+          }}
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
+          disabled={currentPage === 1 || filteredDatas.length === 0}
         >
           Précédent
         </button>
@@ -127,6 +185,10 @@ const EmployeeTable = ({ rowsPerPage, datas, headers }) => {
           Page {currentPage} sur {totalPages}
         </span>
         <button
+          style={{
+            backgroundColor: apparenceColor,
+            color: darkenColor(apparenceColor),
+          }}
           onClick={() =>
             setCurrentPage((prev) => Math.min(prev + 1, totalPages))
           }

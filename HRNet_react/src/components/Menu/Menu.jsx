@@ -11,10 +11,10 @@ const Menu = () => {
         <h1>HRNet</h1>
       </div>
       <div className="menu">
-        <NavLink to="/home" className="link" activeClassName="active">
+        <NavLink to="/home" className="link" activeclassname="active">
           Home
         </NavLink>
-        <NavLink to="/table" className="link" activeClassName="active">
+        <NavLink to="/table" className="link" activeclassname="active">
           Current Employee
         </NavLink>
       </div>

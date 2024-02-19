@@ -81,7 +81,6 @@ const CreateEmploye = () => {
             onChange={setDateOfBirth}
           />
         </div>
-
         <div className="CreateEmploye-container_imput">
           <label htmlFor="Street">Street</label>
           <input

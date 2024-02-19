@@ -44,11 +44,12 @@ td {
 
 .employee_table_container button:disabled {
   color: gray;
+  opacity: 0.5;
+
   font-weight: 400 !important;
 }
 
 .employee_table_container button:hover {
-  background-color: rgb(212, 226, 157) !important;
   border: none !important;
 }
 
