@@ -3,9 +3,21 @@
 }
 
 .calendar {
-  width: 100%;
+  width: 72.5%;
   position: relative;
   border-radius: 10px;
+}
+
+.calendar > input {
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  font-size: larger;
+  width: 96.5%;
+}
+
+.calendar > input::placeholder {
+  color: black;
 }
 
 .calendar-layout {

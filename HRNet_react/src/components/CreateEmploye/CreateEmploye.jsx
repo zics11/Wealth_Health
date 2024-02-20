@@ -59,72 +59,96 @@ const CreateEmploye = () => {
     <div className="CreateEmploye-container">
       <h3>Create Employée</h3>
       <form onSubmit={(e) => e.preventDefault()}>
-        <div className="CreateEmploye-container_imput">
-          <label htmlFor="firstName">First Name</label>
-          <input
-            type="date"
-            value={firstName}
-            id="firstName"
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <label htmlFor="lastName">Last Name</label>
-          <input  
-            type="text"
-            value={lastName}
-            id="lastName"
-            onChange={(e) => setLastName(e.target.value)}
-          />
-          <label>Date of birth</label>
-          <DatePicker
-            apparenceColor="rgb(110, 133, 15)"
-            inputValue={dateOfBirth}
-            change={setDateOfBirth}
-          />
+        <div className="Imput-container">
+          <div className="CreateEmploye-container_imput">
+            <div className="input">
+              <label htmlFor="firstName">First Name</label>
+              <input
+                type="text"
+                value={firstName}
+                id="firstName"
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </div>
+            <div className="input">
+              <label htmlFor="lastName">Last Name</label>
+              <input
+                type="text"
+                value={lastName}
+                id="lastName"
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+            <div className="input">
+              <label>Date of birth</label>
+              <DatePicker
+                apparenceColor="rgb(110, 133, 15)"
+                inputValue={dateOfBirth}
+                change={setDateOfBirth}
+              />
+            </div>
+          </div>
+          <div className="CreateEmploye-container_imput">
+            <div className="input">
+              <label htmlFor="Street">Street</label>
+              <input
+                type="text"
+                value={Street}
+                id="Street"
+                onChange={(e) => setStreet(e.target.value)}
+              />
+            </div>
+            <div className="input">
+              <label htmlFor="city">City</label>
+              <input
+                type="text"
+                value={city}
+                id="city"
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </div>
+            <div className="input">
+              <label htmlFor="country">Country</label>
+              <Dropdown
+                list={countrys}
+                description="..."
+                value={country}
+                onChange={setCountry}
+              />
+            </div>
+            <div className="input">
+              <label htmlFor="zipCode">Zip code</label>
+              <input
+                type="text"
+                value={zipCode}
+                id="zipCode"
+                onChange={(e) => setZipCode(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="CreateEmploye-container_imput">
+            <div className="input">
+              <label>Start date</label>
+              <DatePicker
+                apparenceColor="rgb(110, 133, 15)"
+                inputValue={startDate}
+                change={setStartDate}
+              />
+            </div>
+            <div className="input">
+              <label htmlFor="department">Department</label>
+              <Dropdown
+                list={departments}
+                description="..."
+                value={department}
+                onChange={setDepartment}
+              />
+            </div>
+          </div>
         </div>
-        <div className="CreateEmploye-container_imput">
-          <label htmlFor="Street">Street</label>
-          <input
-            type="text"
-            value={Street}
-            id="Street"
-            onChange={(e) => setStreet(e.target.value)}
-          />
-          <label htmlFor="city">City</label>
-          <input
-            type="text"
-            value={city}
-            id="city"
-            onChange={(e) => setCity(e.target.value)}
-          />
-          <Dropdown
-            list={countrys}
-            description="Select Country"
-            value={country}
-            onChange={setCountry}
-          />
-          <label htmlFor="zipCode">Zip code</label>
-          <input
-            type="text"
-            value={zipCode}
-            id="zipCode"
-            onChange={(e) => setZipCode(e.target.value)}
-          />
-        </div>
-        <div className="CreateEmploye-container_imput">
-          <label>Start date</label>
-          <DatePicker
-            apparenceColor="rgb(110, 133, 15)"
-            inputValue={startDate}
-            change={setStartDate}
-          />
-          <Dropdown
-            list={departments}
-            description="Select département"
-            value={department}
-            onChange={setDepartment}
-          />
-        </div>
-        <button onClick={saveEmployee}>Save</button>
+        <button onClick={saveEmployee} className="save">
+          Save
+        </button>
       </form>
       <ConfirmationModal
         isVisible={isModalVisible}

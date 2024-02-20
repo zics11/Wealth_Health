@@ -22,12 +22,16 @@ const CurrentEmployees = () => {
   return (
     <div className="table-container">
       <Menu />
-      <EmployeeTable
-        rowsPerPage={10}
-        datas={employees}
-        headers={head}
-        apparenceColor="#f5b1b1"
-      />
+      <div className="CurrentEmployees-container">
+        <h3>Current Employée</h3>
+
+        <EmployeeTable
+          rowsPerPage={10}
+          datas={employees}
+          headers={head}
+          apparenceColor="#ebf4c9"
+        />
+      </div>
     </div>
   )
 }

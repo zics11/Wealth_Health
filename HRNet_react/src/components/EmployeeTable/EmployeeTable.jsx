@@ -112,7 +112,7 @@ const EmployeeTable = ({ rowsPerPage, datas, headers, apparenceColor }) => {
         onChange={(e) => setSearchTerm(e.target.value)}
         style={{
           color: darkenColor(apparenceColor),
-          border: `1px solid ${darkenColor(apparenceColor)}`,
+          // border: `1px solid ${darkenColor(apparenceColor)}`,
         }}
       />
       <table

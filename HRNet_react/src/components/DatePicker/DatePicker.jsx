@@ -277,7 +277,7 @@ const DatePicker = ({ apparenceColor, inputValue, change }) => {
         onChange={handleDateChange} // Appel de la fonction handleDateChange lors du changement de valeur de l'input
         onFocus={focus}
         onBlur={blur}
-        placeholder="Pick a date"
+        placeholder="..."
       />
       <div
         className={`calendar-layout ${active ? '' : 'hidden'}`}
