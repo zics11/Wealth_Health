@@ -129,15 +129,15 @@ const EmployeeTable = ({ rowsPerPage, datas, headers, apparenceColor }) => {
             {headers.map((header, index) => (
               <th
                 key={index}
-                onClick={() => handleSort(header)}
+                onClick={() => handleSort(header.key)}
                 style={{
                   backgroundColor: apparenceColor,
                   color: darkenColor(apparenceColor),
                   border: `1px solid ${darkenColor(apparenceColor)}`,
                 }}
               >
-                {header}
-                {renderSortIcon(header)}
+                {header.name}
+                {renderSortIcon(header.key)}
               </th>
             ))}
           </tr>

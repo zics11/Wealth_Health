@@ -8,15 +8,15 @@ import { useSelector } from 'react-redux'
 const CurrentEmployees = () => {
   const employees = useSelector((state) => state.employee.employees)
   const head = [
-    'Street',
-    'city',
-    'country',
-    'dateOfBirth',
-    'department',
-    'firstName',
-    'lastName',
-    'startDate',
-    'zipCode',
+    { key: 'Street', name: 'Street' },
+    { key: 'city', name: 'City' },
+    { key: 'country', name: 'Country' },
+    { key: 'dateOfBirth', name: 'Date of Birth' },
+    { key: 'department', name: 'Département' },
+    { key: 'firstName', name: 'First name' },
+    { key: 'lastName', name: 'Last name' },
+    { key: 'startDate', name: 'Start date' },
+    { key: 'zipCode', name: 'Zip code' },
   ]
 
   return (

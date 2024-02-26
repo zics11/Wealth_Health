@@ -46,7 +46,7 @@ td {
 }
 
 .employee_table_container button {
-  background-color: rgb(235, 244, 201) 
+  background-color: rgb(235, 244, 201) ;
   color: rgb(90, 110, 7);
   font-weight: 800 !important;
 }

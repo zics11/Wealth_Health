@@ -31,7 +31,10 @@
 
 .save {
   font-size: larger;
-  font-weight: 800;
+}
+
+.save:hover {
+  background-color: rgb(234, 239, 232);
 }
 
 .Imput-container {
@@ -55,10 +58,20 @@
   justify-content: space-between;
 }
 
-.input > input {
+.error-container {
+  display: flex;
+  width: 70%;
+  flex-direction: column;
+}
+
+.error-container > input {
   padding: 5px;
   border-radius: 5px;
   border: none;
   font-size: larger;
-  width: 70%;
+}
+
+.error-container > span {
+  color: red;
+  font-size: smaller;
 }
