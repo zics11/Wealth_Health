@@ -4,6 +4,7 @@ import './CurrentEmployees.css'
 import EmployeeTable from '../../components/EmployeeTable/EmployeeTable.jsx'
 import Menu from '../../components/Menu/Menu'
 import { useSelector } from 'react-redux'
+import { Table } from 'my-simple-table'
 
 const CurrentEmployees = () => {
   const employees = useSelector((state) => state.employee.employees)
@@ -30,6 +31,13 @@ const CurrentEmployees = () => {
           datas={employees}
           headers={head}
           apparenceColor="#ebf4c9"
+        />
+
+        <Table
+          rowsPerPage={5}
+          datas={employees}
+          headers={head}
+          apparenceColor="#3498db"
         />
       </div>
     </div>

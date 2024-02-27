@@ -13,8 +13,14 @@ const EmployeeTable = ({ rowsPerPage, datas, headers, apparenceColor }) => {
   EmployeeTable.propTypes = {
     rowsPerPage: PropTypes.number.isRequired,
     datas: PropTypes.arrayOf(PropTypes.object).isRequired,
-    headers: PropTypes.arrayOf(PropTypes.string).isRequired,
+    headers: PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+      })
+    ).isRequired,
   }
+
   useEffect(() => {
     if (datas.length === 0) {
       setCurrentPage(0)
@@ -165,7 +171,7 @@ const EmployeeTable = ({ rowsPerPage, datas, headers, apparenceColor }) => {
                       border: `1px solid ${darkenColor(apparenceColor)}`,
                     }}
                   >
-                    {row[header]}
+                    {row[header.key]}
                   </td>
                 ))}
               </tr>

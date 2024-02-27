@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
-// import DatePicker from 'react-datepicker'
 import DatePicker from '../DatePicker/DatePicker'
-import 'react-datepicker/dist/react-datepicker.css'
 import './CreateEmploye.css'
 import Dropdown from '../Dropdown/Dropdown.jsx'
 import { useDispatch } from 'react-redux'
