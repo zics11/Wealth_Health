@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import './CurrentEmployees.css'
-import EmployeeTable from '../../components/EmployeeTable/EmployeeTable.jsx'
 import Menu from '../../components/Menu/Menu'
 import { useSelector } from 'react-redux'
 import { Table } from 'my-simple-table'
@@ -25,19 +24,11 @@ const CurrentEmployees = () => {
       <Menu />
       <div className="CurrentEmployees-container">
         <h3>Current Employée</h3>
-
-        <EmployeeTable
+        <Table
           rowsPerPage={10}
           datas={employees}
           headers={head}
           apparenceColor="#ebf4c9"
-        />
-
-        <Table
-          rowsPerPage={5}
-          datas={employees}
-          headers={head}
-          apparenceColor="#3498db"
         />
       </div>
     </div>
