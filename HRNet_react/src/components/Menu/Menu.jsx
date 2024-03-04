@@ -3,7 +3,6 @@
  * @module Menu
  */
 
-
 import React from 'react'
 import Logo from '../../assets/logo.jpg'
 import './Menu.css'
@@ -23,10 +22,10 @@ const Menu = () => {
       </div>
       {/* Liens de navigation */}
       <div className="menu">
-        <NavLink to="/home" className="link" activeClassName="active">
+        <NavLink to="/home" className="link" activeclassname="active">
           Home
         </NavLink>
-        <NavLink to="/table" className="link" activeClassName="active">
+        <NavLink to="/table" className="link" activeclassname="active">
           Current Employee
         </NavLink>
       </div>

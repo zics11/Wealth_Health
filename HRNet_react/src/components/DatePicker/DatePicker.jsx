@@ -69,7 +69,6 @@ const DatePicker = ({ apparenceColor, inputValue, change }) => {
 
   useEffect(() => {
     handleDateChange(date)
-    console.log('date', date)
   }, [date])
 
   /**
@@ -259,7 +258,6 @@ const DatePicker = ({ apparenceColor, inputValue, change }) => {
     } else if (cell.month === getNextMonth(activeDate.substr(4, 2))) {
       setNextMonth()
     }
-    console.log('dsq')
     const newDate =
       ('0' + cell.day).slice(-2) + '/' + cell.month + '/' + cell.year
     // handleDateChange(newDate) // Passer la nouvelle valeur de date à handleDateChange
@@ -356,25 +354,20 @@ const DatePicker = ({ apparenceColor, inputValue, change }) => {
    * @returns {void}
    */
   const handleDateChange = (newDate) => {
-    console.log('newDate', newDate)
-
     // Diviser la chaîne en jour, mois et année
     const [day, month, year] = newDate.split('/')
 
     // Créer un nouvel objet Date
     const formattedDate = new Date(`${year}-${month}-${day}`)
-    console.log('formattedDate', formattedDate)
 
     // Vérifier si la date est valide
     if (isNaN(formattedDate.getTime())) {
-      console.log('Invalid date')
       return // Sortir de la fonction si la date est invalide
     }
 
     // Formater la date au format "jj/mm/aaaa"
     const formattedDateString = formattedDate.toISOString().split('T')[0]
 
-    console.log('formattedDateString', formattedDateString)
     change(formattedDateString) // Appeler la fonction onChange pour transmettre la nouvelle valeur au composant parent
   }
 

@@ -30,7 +30,7 @@
 
 .logo h1 {
   color: rgb(110, 133, 15);
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .menu {
@@ -39,7 +39,7 @@
 }
 
 .link {
-  color: rgb(110, 133, 15);
+  color: black;
   background-color: rgb(235, 244, 201);
   padding: 10px;
   border-radius: 10px;
@@ -53,5 +53,4 @@
 .active {
   font-weight: 800;
   background-color: rgb(212, 226, 157);
-  color: rgb(102, 124, 14);
 }

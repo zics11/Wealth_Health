@@ -36,7 +36,7 @@ const CurrentEmployees = () => {
       {/* Composant de menu */}
       <Menu />
       <div className="CurrentEmployees-container">
-        <h3>Current Employée</h3>
+        <h2>Current Employée</h2>
         {/* Tableau des employés */}
         <Table
           rowsPerPage={10}

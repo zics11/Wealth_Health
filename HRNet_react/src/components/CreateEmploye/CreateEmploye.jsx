@@ -136,7 +136,7 @@ const CreateEmploye = () => {
 
   return (
     <div className="CreateEmploye-container">
-      <h3>Create Employée</h3>
+      <h2>Create Employée</h2>
       <form onSubmit={(e) => e.preventDefault()}>
         <div className="Imput-container">
           <div className="CreateEmploye-container_imput">

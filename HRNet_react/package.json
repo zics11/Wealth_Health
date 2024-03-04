@@ -27,7 +27,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "my-simple-table": "^1.1.24",
+    "my-simple-table": "^1.1.30",
     "vite": "^5.0.8"
   }
 }
