@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Component for creating an employee.
+ * @module CreateEmploye
+ */
+
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import DatePicker from '../DatePicker/DatePicker'
@@ -8,6 +13,10 @@ import { saveEmployeeData } from './employeeSlice.js'
 import ConfirmationModal from '../Modal/Modal'
 import { departments, countrys } from '../../db/dataDropdown'
 
+/**
+ * Functional component for creating an employee.
+ * @returns {JSX.Element} JSX for CreateEmploye component.
+ */
 const CreateEmploye = () => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -23,11 +32,16 @@ const CreateEmploye = () => {
 
   const dispatch = useDispatch()
 
+  /**
+   * Resets the form fields to their initial values.
+   * @returns {void}
+   */
   const resetForm = () => {
+    // Reset all state values to their initial values
     setFirstName('')
     setLastName('')
-    setDateOfBirth('') // Réinitialiser la date de naissance à la date actuelle
-    setStartDate('') // Réinitialiser la date de début à la date actuelle
+    setDateOfBirth('') // Reset date of birth to current date
+    setStartDate('') // Reset start date to current date
     setCountry('')
     setStreet('')
     setCity('')
@@ -36,6 +50,10 @@ const CreateEmploye = () => {
     setErrors({})
   }
 
+  /**
+   * Validates the form fields and returns any errors found.
+   * @returns {Object} Object containing error messages for invalid fields.
+   */
   const validateForm = () => {
     const errors = {}
 
@@ -80,9 +98,18 @@ const CreateEmploye = () => {
     return errors
   }
 
+  /**
+   * Fonction pour sauvegarder les données de l'employé après validation.
+   * @returns {void}
+   */
+
   const saveEmployee = () => {
+    // Valider le formulaire pour détecter les erreurs
     const errors = validateForm()
+
+    // Vérifier s'il n'y a pas d'erreurs dans le formulaire
     if (Object.keys(errors).length === 0) {
+      // Créer un objet contenant les données de l'employé à sauvegarder
       const employeeData = {
         firstName,
         lastName,
@@ -94,11 +121,15 @@ const CreateEmploye = () => {
         zipCode,
         department,
       }
-      // Dispatch l'action avec les données de l'employé
+
+      // Envoyer les données de l'employé au magasin en dispatchant l'action
       dispatch(saveEmployeeData(employeeData))
+      // Réinitialiser le formulaire après l'envoi des données
       resetForm()
+      // Afficher la modal de confirmation après avoir sauvegardé les données
       setIsModalVisible(true)
     } else {
+      // Mettre à jour l'état des erreurs si le formulaire est invalide
       setErrors(errors)
     }
   }
@@ -123,7 +154,6 @@ const CreateEmploye = () => {
                 )}
               </div>
             </div>
-
             <div className="input">
               <label htmlFor="lastName">Last Name</label>
               <div className="error-container">

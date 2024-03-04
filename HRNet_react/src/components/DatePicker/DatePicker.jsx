@@ -1,5 +1,19 @@
+/**
+ * @fileoverview Composant de sélection de date.
+ * @module DatePicker
+ */
+
 import React, { useState, useEffect } from 'react'
 import './DatePicker.css'
+
+/**
+ * Composant de sélection de date.
+ * @param {Object} props - Les props du composant.
+ * @param {string} props.apparenceColor - La couleur d'apparence du composant.
+ * @param {string} props.inputValue - La valeur actuelle de l'input.
+ * @param {Function} props.change - La fonction de mise à jour de la valeur de l'input.
+ * @returns {JSX.Element} Composant de sélection de date.
+ */
 
 const DatePicker = ({ apparenceColor, inputValue, change }) => {
   const [date, setDate] = useState('')
@@ -42,6 +56,10 @@ const DatePicker = ({ apparenceColor, inputValue, change }) => {
     }
   }, [inputValue])
 
+  /**
+   * Fonction pour initialiser le calendrier avec le mois courant.
+   * @returns {void}
+   */
   useEffect(() => {
     const currentYear = new Date().getFullYear()
     const currentMonth = ('0' + (new Date().getMonth() + 1)).slice(-2)
@@ -54,40 +72,82 @@ const DatePicker = ({ apparenceColor, inputValue, change }) => {
     console.log('date', date)
   }, [date])
 
+  /**
+   * Fonction pour mettre le focus sur l'input.
+   * @returns {void}
+   */
   const focus = () => {
     setActive(true)
     setCellHeight(`${document.querySelector('input').offsetWidth / 7}px`)
   }
 
+  /**
+   * Fonction pour enlever le focus de l'input.
+   * @returns {void}
+   */
   const blur = () => {
     setActive(false)
   }
 
+  /**
+   * Fonction pour obtenir le mois précédent.
+   * @param {string} month - Le mois actuel.
+   * @returns {string} Le mois précédent.
+   */
   const getPreviousMonth = (month) => {
     if (parseInt(month) === 1) return '12'
     else return ('0' + (parseInt(month) - 1)).slice(-2)
   }
 
+  /**
+   * Fonction pour obtenir le mois suivant.
+   * @param {string} month - Le mois actuel.
+   * @returns {string} Le mois suivant.
+   */
   const getNextMonth = (month) => {
     if (parseInt(month) === 12) return '01'
     else return ('0' + (parseInt(month) + 1)).slice(-2)
   }
 
+  /**
+   * Fonction pour obtenir le nombre de jours dans un mois.
+   * @param {number} year - L'année.
+   * @param {string} month - Le mois.
+   * @returns {number} Le nombre de jours dans le mois.
+   */
   const getNumberOfDaysInMonth = (year, month) => {
     return new Date(year, month, 0).getDate()
   }
 
+  /**
+   * Fonction pour obtenir le nombre de jours dans le mois précédent.
+   * @param {number} year - L'année.
+   * @param {string} month - Le mois.
+   * @returns {number} Le nombre de jours dans le mois précédent.
+   */
   const getNumberOfDaysInPreviousMonth = (year, month) => {
     if (month === '01')
       return new Date(year - 1, getPreviousMonth(month), 0).getDate()
     else return new Date(year, getPreviousMonth(month), 0).getDate()
   }
 
+  /**
+   * Fonction pour obtenir le premier jour du mois.
+   * @param {number} year - L'année.
+   * @param {string} month - Le mois.
+   * @returns {number} Le premier jour du mois.
+   */
   const getFirstDayOfMonth = (year, month) => {
     if (new Date(year, parseInt(month) - 1, 1).getDay() - 1 === -1) return 6
     else return new Date(year, parseInt(month) - 1, 1).getDay() - 1
   }
 
+  /**
+   * Fonction pour remplir le calendrier avec les jours du mois.
+   * @param {number} year - L'année.
+   * @param {string} month - Le mois.
+   * @returns {void}
+   */
   const populateCalendar = (year, month) => {
     const firstDayOfMonth = getFirstDayOfMonth(year, month)
     const numberOfRows = Math.ceil(getNumberOfDaysInMonth(year, month) / 7)
@@ -152,6 +212,10 @@ const DatePicker = ({ apparenceColor, inputValue, change }) => {
     setCalendarDays(rows)
   }
 
+  /**
+   * Fonction pour définir le mois précédent comme mois actif.
+   * @returns {void}
+   */
   const setPreviousMonth = () => {
     let activeYear = activeDate.substr(0, 4)
     let activeMonth = activeDate.substr(4, 2)
@@ -166,6 +230,10 @@ const DatePicker = ({ apparenceColor, inputValue, change }) => {
     animeSwipeRight()
   }
 
+  /**
+   * Fonction pour définir le mois suivant comme mois actif.
+   * @returns {void}
+   */
   const setNextMonth = () => {
     let activeYear = activeDate.substr(0, 4)
     let activeMonth = activeDate.substr(4, 2)
@@ -180,6 +248,11 @@ const DatePicker = ({ apparenceColor, inputValue, change }) => {
     animeSwipeLeft()
   }
 
+  /**
+   * Fonction pour sélectionner un jour dans le calendrier.
+   * @param {Object} cell - La cellule du calendrier.
+   * @returns {void}
+   */
   const selectDay = (cell) => {
     if (cell.month === getPreviousMonth(activeDate.substr(4, 2))) {
       setPreviousMonth()
@@ -195,14 +268,28 @@ const DatePicker = ({ apparenceColor, inputValue, change }) => {
     setDate(newDate)
   }
 
+  /**
+   * Fonction pour vérifier si une cellule est sélectionnée.
+   * @param {Object} cell - La cellule du calendrier.
+   * @returns {boolean} True si la cellule est sélectionnée, sinon False.
+   */
   const isSelected = (cell) => {
     return ('0' + cell.day).slice(-2) + cell.month + cell.year === activeDay
   }
 
+  /**
+   * Fonction pour vérifier si une cellule est désactivée.
+   * @param {Object} cell - La cellule du calendrier.
+   * @returns {boolean} True si la cellule est désactivée, sinon False.
+   */
   const isDisabled = (cell) => {
     return parseInt(cell.month) !== parseInt(activeDate.substr(4, 2))
   }
 
+  /**
+   * Fonction pour animer le swipe vers la gauche.
+   * @returns {void}
+   */
   const animeSwipeLeft = () => {
     setSwipeLeft(true)
     setTimeout(() => {
@@ -210,6 +297,10 @@ const DatePicker = ({ apparenceColor, inputValue, change }) => {
     }, 300)
   }
 
+  /**
+   * Fonction pour animer le swipe vers la droite.
+   * @returns {void}
+   */
   const animeSwipeRight = () => {
     setSwipeRight(true)
     setTimeout(() => {
@@ -217,14 +308,27 @@ const DatePicker = ({ apparenceColor, inputValue, change }) => {
     }, 300)
   }
 
+  /**
+   * Fonction pour raccourcir une chaîne de trois caractères.
+   * @param {string} item - La chaîne à raccourcir.
+   * @returns {string} La chaîne raccourcie.
+   */
   const trimThreeChar = (item) => {
     return item.substr(0, 3)
   }
 
+  /**
+   * Fonction pour formater le mois et l'année.
+   * @returns {string} Le mois et l'année formatés.
+   */
   const monthYearFormatted = () => {
     return monthes[activeDate.substr(4, 2)] + ' ' + activeDate.substr(0, 4)
   }
 
+  /**
+   * Crée les lignes du calendrier avec les jours.
+   * @type {Array<JSX.Element>} Les lignes du calendrier avec les jours.
+   */
   const calendarRows = calendarDays.map((row, index) => (
     <div
       className={`calendar-row ${swipeLeft ? 'swipe-left' : ''} ${swipeRight ? 'swipe-right' : ''}`}
@@ -246,6 +350,11 @@ const DatePicker = ({ apparenceColor, inputValue, change }) => {
     </div>
   ))
 
+  /**
+   * Fonction pour gérer le changement de date.
+   * @param {string} newDate - La nouvelle date sélectionnée.
+   * @returns {void}
+   */
   const handleDateChange = (newDate) => {
     console.log('newDate', newDate)
 
