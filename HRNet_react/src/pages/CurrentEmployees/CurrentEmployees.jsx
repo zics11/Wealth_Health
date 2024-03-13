@@ -39,7 +39,6 @@ const CurrentEmployees = () => {
         <h2>Current Employée</h2>
         {/* Tableau des employés */}
         <Table
-          rowsPerPage={10}
           datas={employees}
           headers={head}
           apparenceColor="#ebf4c9"
